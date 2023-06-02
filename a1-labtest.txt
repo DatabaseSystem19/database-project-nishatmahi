@@ -1,0 +1,27 @@
+select first_name, last_name, email, dep.name, salary from employees em join salaries sa on em.employee_id=sa.employee_id join departments dep on em.department_id=dep.department_id
+where dep.name = 'Sales';
+
+select avg(salary) from salaries;
+
+select * from (select d.name from employees e join salaries s on e.employee_id=s.employee_id
+join departments d on e.department_id=d.department_id
+group by d.name
+order by avg(salary) desc)
+
+
+
+
+select first_name, last_name, email, sum(salary)
+from employees e join salaries s on em.employee_id=sa.employee_id
+where sa.from_date like '2022' group by first_name, last_name, email;
+
+
+select * from
+(select first_name, last_name, email, salary
+from employees em join salaries sa on e.employee_id=s.employee_id where salary=select max(salary) from salaries))
+
+
+select first_name, last_name, email
+from employees em join departments dep on em.department_id=dep.department_id
+where dep.name like '%ng%';
+

@@ -1,0 +1,39 @@
+drop table salaries;
+drop table employees;
+drop table departments;
+create table Departments (
+department_id number(5),
+name varchar(40),
+primary key(department_id));
+
+create table Employees (
+employee_id number(5),
+first_name varchar(20),
+last_name varchar(20),
+email varchar(40),
+hire_date Date,
+department_id number(5),
+primary key (employee_id),
+foreign key (department_id) references Departments(department_id));
+
+create table Salaries (
+employee_id number(5),
+salary number(15),
+from_date Date,
+to_date Date,
+foreign key (employee_id) references Employees(employee_id));
+
+insert into Departments(department_id, name)values(1 , 'Sales');
+insert into Departments(department_id, name)values(2 , 'Marketing');
+insert into Departments(department_id, name)values(3 , 'Engineering');
+insert into Departments(department_id, name)values(4 , 'Finance');
+
+insert into Employees(employee_id, first_name, last_name, email, hire_date, department_id)values(1, 'John', 'Doe', 'johndoe@example.com', '01-jan-2022', 1);
+insert into Employees(employee_id, first_name, last_name, email, hire_date, department_id)values(2, 'Jane', 'Doe', 'janedoe@example.com', '01-feb-2022', 1);
+insert into Employees(employee_id, first_name, last_name, email, hire_date, department_id)values(3, 'Alice', 'Smith', 'alicesmith@example.com', '01-mar-2022', 2);
+insert into Employees(employee_id, first_name, last_name, email, hire_date, department_id)values(4, 'Bob', 'Johnson', 'bobjohnson@example.com', '01-apr-2022', 2);
+
+insert into Salaries(employee_id, salary, from_date, to_date)values(1, 50000, to_date('2022-01-01','YYYY-MM-DD'), to_date('2022-12-31','YYYY-MM-DD'));
+insert into Salaries(employee_id, salary, from_date, to_date)values(2, 60000, to_date('2022-02-01','YYYY-MM-DD'), to_date('2022-12-31','YYYY-MM-DD'));
+insert into Salaries(employee_id, salary, from_date, to_date)values(3, 70000, to_date('2022-03-01','YYYY-MM-DD'), to_date('2022-12-31','YYYY-MM-DD'));
+insert into Salaries(employee_id, salary, from_date, to_date)values(4, 80000, to_date('2022-04-01','YYYY-MM-DD'), to_date('2022-12-31','YYYY-MM-DD'));

@@ -1,0 +1,48 @@
+set pagesize 200
+set linesize 100
+drop table Order_items;
+drop table orders;
+drop table Customers;
+
+
+create table Customers(
+customer_id number(10),
+customer_name varchar(30),
+customer_email varchar(40),
+primary key (customer_id)
+);
+
+create table orders(
+order_id number(10),
+order_date date,
+customer_id number(10),
+primary key (order_id),
+foreign key(customer_id) references Customers(customer_id)
+);
+
+create table Order_items(
+order_item_id number(10),
+order_id number(10),
+product_name varchar(30),
+quantity number(10),
+Price number(10,4),
+primary key (order_item_id),
+foreign key(order_id) references orders(order_id)
+);
+
+
+insert into Customers values(1,'John Smith', 'john.smith@example.com');
+insert into Customers values(2,'Jane Dae', 'jane.dae@example.com');
+insert into Customers values(3,'Bob Johnson', 'bob.johnson@example.com');
+insert into Customers values(4,'Alice Williams', 'alice.williams@example.com');
+
+insert into orders values(1001,'28-mar-2023', 1);
+insert into orders values(1002,'29-mar-2023', 2);
+insert into orders values(1003,'30-mar-2023', 1);
+insert into orders values(1004,'31-mar-2023', 3);
+
+insert into Order_items values(1, 1001,'iPhone', 2, 999.99);
+insert into Order_items values(2, 1001,'Google Pixel', 1, 699.99);
+insert into Order_items values(3, 1002,'Samsung Galaxy', 1, 799.99);
+insert into Order_items values(4, 1003,'OnePlus', 3, 899.99);
+

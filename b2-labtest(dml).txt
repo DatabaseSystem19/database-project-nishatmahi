@@ -1,0 +1,61 @@
+DROP TABLE IF EXISTS Order;
+DROP TABLE IF EXISTS Goods;
+DROP TABLE IF EXISTS Customer;
+
+
+CREATE TABLE Customer (
+			ID INT ,
+			Name VARCHAR(50) ,
+			Contact VARCHAR(50),
+                        PRIMARY KEY (ID),
+			);
+CREATE TABLE Goods (
+		Goods_ID INT NOT NULL PRIMARY KEY,
+		Goods_Name VARCHAR(50) NOT NULL,
+		Price DECIMAL(10, 2) NOT NULL CHECK (Price >= 0)
+					);
+CREATE TABLE Order (
+		Order_Date DATE NOT NULL,
+	Customer_ID INT NOT NULL,
+     Goods_ID INT NOT NULL,
+	PRIMARY KEY (Customer_ID, Goods_ID),
+	FOREIGN KEY (Customer_ID) REFERENCES Customer(ID) ON DELETE CASCADE,
+	FOREIGN KEY (Goods_ID) REFERENCES Goods(Goods_ID) ON DELETE CASCADE
+);
+				  
+INSERT INTO Customer (ID, Name, Contact, Address)
+VALUES (1, 'John Doe', '555-1234', '123 Main St');
+											
+INSERT INTO Customer (ID, Name, Contact, Address)
+VALUES (2, 'Jane Smith', '555-5678', '456 Oak Ave');
+											
+INSERT INTO Customer (ID, Name, Contact, Address)
+VALUES (3, 'Bob Johnson', '555-9012', '789 Elm St');
+											
+INSERT INTO Customer (ID, Name, Contact, Address)
+VALUES (4, 'Alice Brown', '555-3456', '321 Pine St');
+
+INSERT INTO Goods (Goods_ID, Goods_Name, Price)
+VALUES (1, 'Widget', 10.99);
+											
+INSERT INTO Goods (Goods_ID, Goods_Name, Price)
+VALUES (2, 'Gadget', 19.99);
+											
+INSERT INTO Goods (Goods_ID, Goods_Name, Price)
+VALUES (3, 'Thingamajig', 8.99);
+											
+INSERT INTO Goods (Goods_ID, Goods_Name, Price)
+VALUES (4, 'Doohickey', 14.99);
+											
+											
+INSERT INTO Order (Order_Date, Customer_ID, Goods_ID)
+VALUES ('2023-03-19', 1, 1);
+											
+INSERT INTO Order (Order_Date, Customer_ID, Goods_ID)
+VALUES ('2023-03-20', 1, 2);
+											
+INSERT INTO Order (Order_Date, Customer_ID, Goods_ID)
+VALUES ('2023-03-21', 2, 3);
+											
+INSERT INTO Order (Order_Date, Customer_ID, Goods_ID)
+VALUES ('2023-03-22', 3, 4);
